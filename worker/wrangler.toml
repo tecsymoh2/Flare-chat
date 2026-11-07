@@ -1,0 +1,22 @@
+# Only needed if you deploy with the Wrangler CLI. The dashboard route in README.md needs no CLI.
+name = "private-chat-api"
+main = "index.js"
+compatibility_date = "2025-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "private-chat"
+database_id = "63969d9e-6ac3-4a7c-87a9-f303e7dcc4f4"
+
+[triggers]
+crons = ["* * * * *"]
+
+[vars]
+SUPABASE_URL = "https://faetctxgwkqytxukoweu.supabase.co"
+SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZhZXRjdHhnd2txeXR4dWtvd2V1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0NDY1ODgsImV4cCI6MjEwOTAyMjU4OH0.KdgVIaJojSRZuFT5FdoFewCTFT7DUApTUfG6AeR_bGw"
+CONVERSATION_ID = "11111111-1111-4111-8111-111111111111"
+ALLOWED_ORIGINS = "https://private-chats-3vbg.vercel.app"
+
+# Secrets (never put these in this file):
+#   wrangler secret put SUPABASE_SERVICE_ROLE_KEY
+#   wrangler secret put PUSH_SECRET
