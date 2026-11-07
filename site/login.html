@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f8a7e" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <title>Sign in · Private Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="login-page">
+  <main class="login-card">
+    <h1>Hi there 👋</h1>
+    <p class="lead">Hope you are <strong>Stacy</strong> or <strong>Symoh</strong>.</p>
+    <p class="muted">They are the only ones allowed here.</p>
+
+    <div class="who-pick" aria-label="Pick who you are">
+      <button type="button" class="who" data-user="Stacy"><span class="avatar">S</span>Stacy</button>
+      <button type="button" class="who" data-user="Symoh"><span class="avatar">S</span>Symoh</button>
+    </div>
+
+    <form id="login-form" novalidate>
+      <label for="username">Username</label>
+      <input id="username" autocomplete="username" autocapitalize="none" required />
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" required />
+      <p id="error" class="form-error" role="alert" hidden></p>
+      <button id="submit" class="btn-primary" type="submit">Sign in</button>
+    </form>
+  </main>
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

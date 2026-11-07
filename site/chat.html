@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f8a7e" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <title>Private Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <p id="boot" class="boot">Loading chat…</p>
+  <div class="chat" id="app" hidden>
+    <header class="bar">
+      <div class="who-bar">
+        <div class="avatar" id="partner-avatar"></div>
+        <div>
+          <h1 id="partner-name"></h1>
+          <p id="status" class="status"></p>
+        </div>
+      </div>
+      <div class="bar-actions">
+        <button id="search-btn" class="icon-btn" type="button" aria-label="Search messages"></button>
+        <button id="call-btn" class="icon-btn" type="button" aria-label="Voice call"></button>
+        <button id="video-btn" class="icon-btn" type="button" aria-label="Video call"></button>
+        <button id="me-btn" class="avatar-btn" type="button" aria-label="Menu"></button>
+      </div>
+    </header>
+
+    <div id="info-bar" class="info-bar" hidden></div>
+    <button id="pin-bar" class="pin-bar" type="button" hidden>📌 <span id="pin-text"></span></button>
+
+    <div id="messages" class="messages" aria-live="polite">
+      <div id="empty" class="empty" hidden></div>
+    </div>
+    <button id="jump-btn" class="jump" type="button" hidden aria-label="Scroll to latest messages"><span>↓</span><b id="jump-count" hidden></b></button>
+    <div id="typing" class="typing" hidden><span></span><span></span><span></span></div>
+
+    <p id="error" class="banner" role="alert" hidden></p>
+
+    <div id="reply-bar" class="strip" hidden>
+      <div class="strip-body"><strong id="reply-name"></strong><span id="reply-text"></span></div>
+      <button id="reply-cancel" class="icon-btn" type="button" aria-label="Cancel reply"></button>
+    </div>
+    <div id="edit-bar" class="strip" hidden>
+      <div class="strip-body"><strong>Editing message</strong><span>Change the text, then press send</span></div>
+      <button id="edit-cancel" class="icon-btn" type="button" aria-label="Cancel edit"></button>
+    </div>
+    <div id="file-chip" class="strip" hidden>
+      <div class="strip-body"><strong>Attachment</strong><span id="file-name"></span></div>
+      <button id="once-btn" class="skip-btn" type="button" hidden>👁 View once</button>
+      <button id="compress-skip" class="skip-btn" type="button" hidden>Send original</button>
+      <button id="file-clear" class="icon-btn" type="button" aria-label="Remove attachment"></button>
+    </div>
+    <div id="emoji-panel" class="emoji-panel" hidden></div>
+
+    <form id="send-form" class="composer">
+      <input id="file" type="file" multiple hidden />
+      <button id="attach-btn" class="icon-btn" type="button" aria-label="Attach a file"></button>
+      <div class="field">
+        <input id="text" placeholder="Message" autocomplete="off" />
+        <button id="emoji-btn" class="icon-btn" type="button" aria-label="Emoji and stickers"></button>
+      </div>
+      <button id="action" class="fab" type="button"></button>
+    </form>
+
+    <div id="rec-bar" class="composer rec" hidden>
+      <button id="rec-cancel" class="icon-btn danger" type="button" aria-label="Discard recording"></button>
+      <div class="rec-info"><i class="rec-dot"></i><span id="rec-time">0:00</span><span class="muted">Recording…</span></div>
+      <button id="rec-send" class="fab" type="button" aria-label="Send voice message"></button>
+    </div>
+  </div>
+  <div id="toast" class="toast" hidden></div>
+  <script type="module" src="js/chat.js"></script>
+  <script>
+    // Safety net: never leave a blank screen if something fails to load.
+    function bootFail(msg){
+      var b=document.getElementById("boot"); if(!b||!document.getElementById("app").hidden) return;
+      b.innerHTML="Couldn\u2019t load the chat. "+(msg?("<small>"+String(msg).replace(/</g,"&lt;")+"</small><br>"):"")+"<a href=\"login.html\">Back to sign in</a>";
+    }
+    addEventListener("error",function(e){bootFail(e.message)});
+    addEventListener("unhandledrejection",function(e){bootFail(e.reason&&e.reason.message||e.reason)});
+    setTimeout(function(){bootFail("Took too long to start.")},8000);
+  </script>
+</body>
+</html>
